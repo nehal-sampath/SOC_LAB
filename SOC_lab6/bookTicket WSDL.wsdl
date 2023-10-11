@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://example.com/movieService"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             name="MovieService"
+             targetNamespace="http://example.com/movieService">
+    
+    <!-- Types - Define the data types used in your service -->
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://example.com/movieService" schemaLocation="movieService.xsd"/>
+        </schema>
+    </types>
+
+    <!-- Messages - Define the input and output messages for operations -->
+    <message name="getMoviesRequest">
+    </message>
+    <message name="getMoviesResponse">
+        <part name="movies" element="tns:MovieList"/>
+    </message>
+    
+    <message name="bookTicketRequest">
+        <part name="movieId" type="xsd:int"/>
+        <part name="numTickets" type="xsd:int"/>
+    </message>
+    <message name="bookTicketResponse">
+        <part name="result" type="xsd:string"/>
+    </message>
+    
+    <!-- Port Type - Define the operations offered by the service -->
+    <portType name="MovieServicePortType">
+        <operation name="getMovies">
+            <input message="tns:getMoviesRequest"/>
+            <output message="tns:getMoviesResponse"/>
+        </operation>
+        <operation name="bookTicket">
+            <input message="tns:bookTicketRequest"/>
+            <output message="tns:bookTicketResponse"/>
+        </operation>
+    </portType>
+    
+    <!-- Binding - Specify how the service is bound to the transport protocol -->
+    <binding name="MovieServiceSOAPBinding" type="tns:MovieServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getMovies">
+            <soap:operation soapAction="http://example.com/movieService/getMovies"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="bookTicket">
+            <soap:operation soapAction="http://example.com/movieService/bookTicket"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    
+    <!-- Service - Define the service endpoint -->
+    <service name="MovieService">
+        <port name="MovieServicePort" binding="tns:MovieServiceSOAPBinding">
+            <soap:address location="http://localhost:8080/movieService"/>
+        </port>
+    </service>
+</definitions>
