@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:web="http://example.com/movieService">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <web:bookTicketRequest>
+            <web:movieId>1</web:movieId>
+            <web:numTickets>2</web:numTickets>
+        </web:bookTicketRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
