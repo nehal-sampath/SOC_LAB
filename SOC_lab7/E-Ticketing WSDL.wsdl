@@ -1,0 +1,103 @@
+<!--Nehal Sampath Kumar
+    AP20110010618
+    CSE-I
+-->
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="MovieTicketService"
+            targetNamespace="http://example.com/movieticketservice"
+            xmlns="http://schemas.xmlsoap.org/wsdl/"
+            xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+            xmlns:tns="http://example.com/movieticketservice"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <!-- Types -->
+    <types>
+        <xsd:schema targetNamespace="http://example.com/movieticketservice">
+            <xsd:element name="Movie">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Title" type="xsd:string"/>
+                        <xsd:element name="Showtimes" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="BookingRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="MovieTitle" type="xsd:string"/>
+                        <xsd:element name="NumTickets" type="xsd:int"/>
+                        <xsd:element name="CustomerName" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="BookingResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="ConfirmationCode" type="xsd:string"/>
+                        <xsd:element name="TotalAmount" type="xsd:decimal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <!-- Messages -->
+    <message name="CheckMovieAvailabilityRequest">
+        <part name="MovieTitle" type="xsd:string"/>
+    </message>
+    <message name="CheckMovieAvailabilityResponse">
+        <part name="Movie" type="tns:Movie"/>
+    </message>
+    <message name="BookTicketRequest">
+        <part name="BookingDetails" type="tns:BookingRequest"/>
+    </message>
+    <message name="BookTicketResponse">
+        <part name="BookingConfirmation" type="tns:BookingResponse"/>
+    </message>
+
+    <!-- Port Type -->
+    <portType name="MovieTicketPortType">
+        <operation name="CheckMovieAvailability">
+            <input message="tns:CheckMovieAvailabilityRequest"/>
+            <output message="tns:CheckMovieAvailabilityResponse"/>
+        </operation>
+        <operation name="BookTicket">
+            <input message="tns:BookTicketRequest"/>
+            <output message="tns:BookTicketResponse"/>
+        </operation>
+    </portType>
+
+    <!-- Binding -->
+    <binding name="MovieTicketBinding" type="tns:MovieTicketPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="CheckMovieAvailability">
+            <soap:operation soapAction="http://example.com/movieticketservice/CheckMovieAvailability"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="BookTicket">
+            <soap:operation soapAction="http://example.com/movieticketservice/BookTicket"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <!-- Service -->
+    <service name="MovieTicketService">
+        <port name="MovieTicketPort" binding="tns:MovieTicketBinding">
+            <soap:address location="http://example.com/movieticketservice"/>
+        </port>
+    </service>
+
+</definitions>
