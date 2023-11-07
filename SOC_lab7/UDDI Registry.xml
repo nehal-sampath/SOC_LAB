@@ -1,0 +1,32 @@
+<businessEntity>
+    <name>MovieTicketBookingService</name>
+    <description>A web service for booking movie tickets.</description>
+    <categoryBag>
+        <keyedReference tModelKey="uuid:uddi-org:types" keyName="Service Taxonomy" keyValue="Movie Ticket Booking" />
+        <keyedReference tModelKey="uuid:uddi.org:categorization:geographic" keyName="Region" keyValue="Global" />
+    </categoryBag>
+    <identifierBag>
+        <keyedReference tModelKey="uuid:uddi.org:identifier:uniqueidentifier" keyName="Service Key" keyValue="12345678-90AB-CDEF-1234-567890ABCDEF" />
+    </identifierBag>
+    <bindingTemplates>
+        <bindingTemplate>
+            <accessPoint type="wsdlURL">
+                http://www.example.com/movie_ticket_booking/movie_ticket_booking.wsdl
+            </accessPoint>
+            <description>WSDL for the Movie Ticket Booking Service</description>
+            <tModelInstanceDetails>
+                <tModelInstanceInfo tModelKey="uuid:uddi.org:service:instanceparms">
+                    <instanceDetails>
+                        <instanceParms>
+                            <overviewURL>http://www.example.com/movie_ticket_booking/overview</overviewURL>
+                            <documentationURL>http://www.example.com/movie_ticket_booking/documentation</documentationURL>
+                            <supportEmail>support@example.com</supportEmail>
+                            <contactName>John Doe</contactName>
+                            <contactPhone>+1-123-456-7890</contactPhone>
+                        </instanceParms>
+                    </instanceDetails>
+                </tModelInstanceInfo>
+            </tModelInstanceDetails>
+        </bindingTemplate>
+    </bindingTemplates>
+</businessEntity>
